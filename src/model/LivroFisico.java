@@ -33,6 +33,6 @@ public class LivroFisico extends Livro {
 
     @Override
     public String toString() {
-        return this.getTitulo() + ": " + this.copiasDisponiveis + " + disponíveis";
+        return this.getIsbn() + " | " + this.getAutor() + " - " + this.getTitulo() + " (" + this.copiasDisponiveis + " cópias disponíveis)";
     }
 }

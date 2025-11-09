@@ -3,10 +3,7 @@ package io;
 import model.*;
 import model.dto.CadastroEmprestimoDTO;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Menu {
     static Scanner scanner = new Scanner(System.in);
@@ -115,7 +112,7 @@ public class Menu {
 
 
     public static boolean verificarExibicaoAcervo() {
-        System.out.println("Deseja verificar a disponibilidade dos livros? (s/n)");
+        System.out.println("* Deseja verificar a disponibilidade dos livros? (s/n)");
         return lerSimNao();
     }
 
@@ -123,11 +120,35 @@ public class Menu {
         for (Livro livro : livros) {
             System.out.println(livro.toString());
         }
-        esperarEnter();
+        System.out.println();
     }
 
     public static void esperarEnter() {
-        System.out.println("Pressione Enter para continuar...");
+        System.out.println("* Pressione Enter para continuar...");
         scanner.nextLine();
+    }
+
+    public static void listarEmprestimosPorLivro(ArrayList<Livro> livros) {
+        ArrayList<Livro> livrosOrdenados = ordenarLivros(livros);
+
+        for (Livro livro : livrosOrdenados) {
+            System.out.print("ISBN: " + livro.getIsbn()
+                    + " | Livro: " + livro.getTitulo());
+            if (livro instanceof LivroDigital) {
+                System.out.print(" (digital)");
+            }
+            System.out.println(" | Quantidade de empréstimos: " + livro.getEmprestimos().size());
+        }
+    }
+
+    public static void exibirTotalEmprestimos(ArrayList<Emprestimo> emprestimos) {
+        System.out.println("Total de empréstimos: " + emprestimos.size());
+    }
+
+    private static ArrayList<Livro> ordenarLivros(ArrayList<Livro> livros) {
+        ArrayList<Livro> livrosOrdenados = new ArrayList<>(livros);
+
+        livrosOrdenados.sort(Comparator.comparingInt((Livro livro) -> livro.getEmprestimos().size()).reversed());
+        return livrosOrdenados;
     }
 }

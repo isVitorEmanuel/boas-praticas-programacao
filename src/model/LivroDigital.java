@@ -10,6 +10,6 @@ public class LivroDigital extends Livro {
 
     @Override
     public String toString() {
-        return this.getTitulo() + ": " + " digital";
+        return this.getIsbn() + " | " + this.getAutor() + " - " + this.getTitulo() + " (livro digital)";
     }
 }

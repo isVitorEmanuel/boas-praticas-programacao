@@ -1,7 +1,5 @@
 import io.Menu;
-import model.Emprestimo;
-import model.Livro;
-import model.Usuario;
+import model.*;
 import model.dto.CadastroEmprestimoDTO;
 
 import java.lang.module.FindException;
@@ -63,11 +61,18 @@ public class OperacoesMenu {
             Usuario usuario = Validador.buscarUsuarioExistente(dadosEmprestimo.getIdUsuario());
             Livro livro = Validador.buscarLivroExistente(dadosEmprestimo.getIsbnLivro());
 
+            if (!Validador.validarDisponibilidade(livro)){
+                return;
+            }
+
             Emprestimo emprestimo = new Emprestimo(usuario, livro, LocalDate.now(), null);
             banco.getEmprestimos().add(emprestimo);
+            livro.getEmprestimos().add(emprestimo);
+            reduzirDisponibilidade(livro);
 
         } catch (FindException e) {
             System.out.println(e.getMessage());
+            Menu.esperarEnter();
         }
     }
 
@@ -77,21 +82,43 @@ public class OperacoesMenu {
         try {
             Emprestimo emprestimo = Validador.buscarEmprestimoPendente(dadosEmprestimo);
             emprestimo.setDataDevolucao(LocalDate.now());
+            aumentarDisponibilidade(emprestimo.getLivro());
+
         } catch (FindException e) {
             System.out.println(e.getMessage());
+            Menu.esperarEnter();
         }
     }
 
     private static void listarLivros() {
         Menu.listarLivros(banco.getLivros());
+        Menu.esperarEnter();
     }
 
     private static void exibirRelatorioEmprestimos() {
-
+        Menu.listarEmprestimosPorLivro(banco.getLivros());
+        Menu.exibirTotalEmprestimos(banco.getEmprestimos());
+        Menu.esperarEnter();
     }
 
     private static void sair() {
         System.out.println("Obrigado por usar o sistema!");
+    }
+
+    private static void reduzirDisponibilidade(Livro livro) {
+        if (livro instanceof LivroFisico){
+            ((LivroFisico) livro).setCopiasDisponiveis(
+                    ((LivroFisico) livro).getCopiasDisponiveis() - 1
+            );
+        }
+    }
+
+    private static void aumentarDisponibilidade(Livro livro) {
+        if (livro instanceof LivroFisico && ((LivroFisico) livro).getQuantidadeCopias() > ((LivroFisico) livro).getCopiasDisponiveis()){
+            ((LivroFisico) livro).setCopiasDisponiveis(
+                    ((LivroFisico) livro).getCopiasDisponiveis() + 1
+            );
+        }
     }
 
 }

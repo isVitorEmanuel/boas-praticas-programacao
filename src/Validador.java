@@ -18,7 +18,6 @@ public class Validador {
         return banco.buscarLivroPorISBN(isbnLivro).orElseThrow( () ->
                 new FindException("Erro: Não foi encontrado um livro com esse ISBN no sistema.")
         );
-
     }
 
     public static Emprestimo buscarEmprestimoPendente(CadastroEmprestimoDTO dadosEmprestimo) {
@@ -29,5 +28,14 @@ public class Validador {
         ).findFirst().orElseThrow(
                 () -> new FindException("Erro: Não foi encontrado nenhum empréstimo pendente com os dados fornecidos.")
         );
+    }
+
+    public static boolean validarDisponibilidade(Livro livro) {
+        if (livro.estaDisponivel()) {
+            return true;
+        } else {
+            System.out.println("Não há cópias disponíveis para este livro. Tente novamente em outro momento.");
+            return false;
+        }
     }
 }

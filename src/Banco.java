@@ -63,6 +63,11 @@ public class Banco {
                 new Emprestimo(usuarios.get(0), livros.get(4), LocalDate.now(), null)
         );
 
+        livros.get(0).getEmprestimos().add(emprestimos.getFirst());
+        livros.get(3).getEmprestimos().add(emprestimos.get(1));
+        livros.get(0).getEmprestimos().add(emprestimos.get(2));
+        livros.get(4).getEmprestimos().add(emprestimos.get(3));
+
         this.usuarios.addAll(usuarios);
         this.livros.addAll(livros);
         this.emprestimos.addAll(emprestimos);
