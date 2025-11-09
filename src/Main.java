@@ -1,4 +1,3 @@
-import model.*;
 import io.Menu;
 
 public class Main {
@@ -11,7 +10,7 @@ public class Main {
         while (opcaoMenu != Menu.OPCAO_SAIDA){
             Menu.exibirMenu();
             opcaoMenu = Menu.lerOpcaoMenu();
-
+            OperacoesMenu.executarOperacao(opcaoMenu);
         }
     }
 }

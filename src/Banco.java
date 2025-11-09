@@ -67,4 +67,11 @@ public class Banco {
         this.emprestimos.addAll(emprestimos);
 
     }
+
+    public int obterProximoIdUsuario() {
+        return usuarios.stream()
+                .mapToInt(Usuario::getId)
+                .max()
+                .orElse(0) + 1;
+    }
 }

@@ -1,11 +1,20 @@
 package io;
 
+import model.Livro;
+import model.LivroDigital;
+import model.LivroFisico;
+import model.Usuario;
+
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
     static Scanner scanner = new Scanner(System.in);
     public static final int OPCAO_SAIDA = 7;
+    private static final String SIM = "s";
+    private static final String NAO = "n";
+    private static final String MENSAGEM_OPCAO_INVALIDA = "Opção inválida! Digite 's' para SIM ou 'n' para NÃO.";
 
     public static void exibirMenu(){
         System.out.println("-----MENU-----");
@@ -29,5 +38,69 @@ public class Menu {
         }
 
         return 0;
+    }
+
+    public static Livro lerDadosLivro() {
+        System.out.println("Digite o título do livro:");
+        String titulo = scanner.nextLine();
+        System.out.println("Digite o autor do livro:");
+        String autor = scanner.nextLine();
+        System.out.println("Digite o ISBN do livro:");
+        String isbn = scanner.nextLine();
+
+        System.out.println("O livro é físico? (s/n)");
+
+        boolean livroFisico = lerSimNao();
+
+        if(livroFisico){
+            return lerDadosLivroFisico(titulo, autor, isbn);
+        } else {
+            return new LivroDigital(titulo, autor, isbn);
+        }
+    }
+
+    private static LivroFisico lerDadosLivroFisico(String titulo, String autor, String isbn) {
+        int quantidadeCopias = lerQuantidadeCopias();
+        return new LivroFisico(titulo, autor, isbn, quantidadeCopias, quantidadeCopias);
+    }
+
+    public static boolean lerSimNao() {
+        while (true) {
+            String resposta = scanner.nextLine().trim().toLowerCase();
+
+            if (resposta.equals(SIM)) {
+                return true;
+            } else if (resposta.equals(NAO)) {
+                return false;
+            } else {
+                System.out.println(MENSAGEM_OPCAO_INVALIDA);
+            }
+        }
+    }
+
+    private static int lerQuantidadeCopias() {
+        while (true) {
+            try {
+                System.out.println("Digite o número de cópias do livro:");
+                int quantidade = scanner.nextInt();
+                scanner.nextLine();
+
+                if (quantidade >= 0) {
+                    return quantidade;
+                } else {
+                    System.out.println("A quantidade deve ser um número não negativo.");
+                }
+            } catch (InputMismatchException e) {
+                scanner.nextLine();
+                System.out.println("Por favor, digite um número válido.");
+            }
+        }
+    }
+
+    public static Usuario lerDadosUsuario() {
+        System.out.println("Digite o nome do usuário:");
+        String nome = scanner.nextLine();
+
+        return new Usuario(0, nome, new ArrayList<>());
     }
 }
