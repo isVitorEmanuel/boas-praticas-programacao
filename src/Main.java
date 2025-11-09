@@ -8,7 +8,7 @@ public class Main {
 
         int opcaoMenu = 0;
 
-        while (opcaoMenu != 7){
+        while (opcaoMenu != Menu.OPCAO_SAIDA){
             Menu.exibirMenu();
             opcaoMenu = Menu.lerOpcaoMenu();
 

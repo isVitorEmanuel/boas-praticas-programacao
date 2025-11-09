@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class Menu {
     static Scanner scanner = new Scanner(System.in);
+    public static final int OPCAO_SAIDA = 7;
 
     public static void exibirMenu(){
         System.out.println("-----MENU-----");
