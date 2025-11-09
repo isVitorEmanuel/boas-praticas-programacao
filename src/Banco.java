@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class Banco {
     private final ArrayList<Usuario> usuarios;
@@ -73,5 +74,17 @@ public class Banco {
                 .mapToInt(Usuario::getId)
                 .max()
                 .orElse(0) + 1;
+    }
+
+    public Optional<Usuario> buscarUsuarioPorId(int idUsuario) {
+        return getUsuarios().stream()
+                .filter(usuario -> usuario.getId() == idUsuario)
+                .findFirst();
+    }
+
+    public Optional<Livro> buscarLivroPorISBN(String isbn) {
+        return getLivros().stream()
+                .filter(livro -> livro.getIsbn().equals(isbn))
+                .findFirst();
     }
 }

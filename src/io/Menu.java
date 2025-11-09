@@ -1,12 +1,11 @@
 package io;
 
-import model.Livro;
-import model.LivroDigital;
-import model.LivroFisico;
-import model.Usuario;
+import model.*;
+import model.dto.CadastroEmprestimoDTO;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
@@ -102,5 +101,33 @@ public class Menu {
         String nome = scanner.nextLine();
 
         return new Usuario(0, nome, new ArrayList<>());
+    }
+
+    public static CadastroEmprestimoDTO lerDadosEmprestimo() {
+        System.out.println("Digite o id do usuário:");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Digite o ISBN do livro:");
+        String isbn = scanner.nextLine();
+
+        return new CadastroEmprestimoDTO(id, isbn);
+    }
+
+
+    public static boolean verificarExibicaoAcervo() {
+        System.out.println("Deseja verificar a disponibilidade dos livros? (s/n)");
+        return lerSimNao();
+    }
+
+    public static void listarLivros(List<Livro> livros) {
+        for (Livro livro : livros) {
+            System.out.println(livro.toString());
+        }
+        esperarEnter();
+    }
+
+    public static void esperarEnter() {
+        System.out.println("Pressione Enter para continuar...");
+        scanner.nextLine();
     }
 }
