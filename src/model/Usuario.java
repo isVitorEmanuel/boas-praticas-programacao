@@ -3,23 +3,23 @@ package model;
 import java.util.List;
 
 public class Usuario {
+    private int id;
     private String nome;
-    private String id;
-    private List<Emprestimo> historicoEmprestimo;
+    private List<Emprestimo> historicoEmprestimos;
 
-    public Usuario(String nome, String id,  List<Emprestimo> historicoEmprestimo) {
-        this.nome = nome;
+    public Usuario(int id,  String nome, List<Emprestimo> historicoEmprestimos) {
         this.id = id;
-        this.historicoEmprestimo = historicoEmprestimo;
+        this.nome = nome;
+        this.historicoEmprestimos = historicoEmprestimos;
     }
 
     public String getNome() { return nome; }
-    public String getId() { return id; }
-    public List<Emprestimo> getHistoricoEmprestimo() { return historicoEmprestimo; }
+    public int getId() { return id; }
+    public List<Emprestimo> getHistoricoEmprestimos() { return historicoEmprestimos; }
 
     public void setNome(String nome) { this.nome = nome; }
-    public void setId(String id) { this.id = id; }
-    public void setHistoricoEmprestimo(List<Emprestimo> historicoEmprestimo) {
-        this.historicoEmprestimo = historicoEmprestimo;
+    public void setId(int id) { this.id = id; }
+    public void setHistoricoEmprestimos(List<Emprestimo> historicoEmprestimos) {
+        this.historicoEmprestimos = historicoEmprestimos;
     }
 }

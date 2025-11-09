@@ -1,9 +1,9 @@
 package model;
 
 public abstract class Livro {
+    protected String isbn;
     protected String titulo;
     protected String autor;
-    protected String isbn;
 
     public Livro(String titulo, String autor, String isbn) {
         this.titulo = titulo;
