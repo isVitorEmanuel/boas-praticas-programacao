@@ -56,10 +56,10 @@ public class Banco {
         );
 
         List<Emprestimo> emprestimos = Arrays.asList(
-                new Emprestimo(usuarios.get(1), livros.get(1), LocalDate.now(), null),
-                new Emprestimo(usuarios.get(2), livros.get(4), LocalDate.now().minusMonths(1), LocalDate.now().minusWeeks(2)),
-                new Emprestimo(usuarios.get(3), livros.get(1), LocalDate.now().minusWeeks(1), null),
-                new Emprestimo(usuarios.get(1), livros.get(5), LocalDate.now(), null)
+                new Emprestimo(usuarios.get(0), livros.get(0), LocalDate.now(), null),
+                new Emprestimo(usuarios.get(1), livros.get(3), LocalDate.now().minusMonths(1), LocalDate.now().minusWeeks(2)),
+                new Emprestimo(usuarios.get(2), livros.get(0), LocalDate.now().minusWeeks(1), null),
+                new Emprestimo(usuarios.get(0), livros.get(4), LocalDate.now(), null)
         );
 
         this.usuarios.addAll(usuarios);
