@@ -151,4 +151,17 @@ public class Menu {
         livrosOrdenados.sort(Comparator.comparingInt((Livro livro) -> livro.getEmprestimos().size()).reversed());
         return livrosOrdenados;
     }
+
+    public static void finalizarCadastroLivro(Livro livro) {
+        System.out.println("Livro cadastrado com sucesso!");
+        System.out.println(livro.toString());
+        esperarEnter();
+    }
+
+    public static void finalizarCadastroUsuario(Usuario usuario) {
+        System.out.println("Usuário cadastrado com sucesso!");
+        System.out.println("Nome: " + usuario.getNome());
+        System.out.println("O ID desse usuário é: " + usuario.getId());
+        esperarEnter();
+    }
 }

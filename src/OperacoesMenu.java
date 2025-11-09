@@ -40,12 +40,14 @@ public class OperacoesMenu {
     private static void cadastrarLivro() {
         Livro livro = Menu.lerDadosLivro();
         banco.getLivros().add(livro);
+        Menu.finalizarCadastroLivro(livro);
     }
 
     private static void cadastrarUsuario() {
         Usuario usuario = Menu.lerDadosUsuario();
         usuario.setId(banco.obterProximoIdUsuario());
         banco.getUsuarios().add(usuario);
+        Menu.finalizarCadastroUsuario(usuario);
     }
 
     private static void registrarEmprestimo() {
