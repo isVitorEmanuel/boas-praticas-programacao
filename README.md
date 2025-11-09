@@ -4,7 +4,7 @@ Alunos:
 - Vitor Emanuel Rodrigues de Alencar (Turma T01);
 - Igor Marques de Lima (Turma T02);
 
-| ~~Somos alunos de turmas diferentes~~
+Obs.: Somos alunos de turmas diferentes
 
 ## 1. Explicação do Projeto
 O projeto consiste em um sistema de gerenciamento de biblioteca, desenvolvido em Java, com o objetivo de aplicar boas práticas 
